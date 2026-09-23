@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: pageHead('Not found')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main class="container error-page">
+    <h1>404</h1>
+    <p>That page doesn't exist.</p>
+    <a href="/" class="btn btn-primary">Back to feed</a>
+</main>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

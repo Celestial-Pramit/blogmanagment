@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: blogmanagement
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+
+server:
+  port: ${PORT:9090}
+  error:
+    include-message: always
+
+logging:
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n"

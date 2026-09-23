@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: pageHead(${mode == 'edit'} ? 'Edit post' : 'New post')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container container-narrow">
+    <div class="page-header">
+        <h1 th:text="${mode == 'edit'} ? 'Edit post' : 'Write a new post'"></h1>
+    </div>
+
+    <form id="blog-form" class="form-card glass"
+          th:attr="data-mode=${mode}, data-post-id=${mode == 'edit' ? post.id : ''}">
+
+        <div id="form-error" class="alert alert-error" hidden></div>
+
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" maxlength="200" required
+                   th:value="${mode == 'edit'} ? ${post.title} : ''">
+        </div>
+
+        <div class="form-group">
+            <label for="excerpt">Excerpt <span class="hint">(optional — auto-generated if left blank)</span></label>
+            <input type="text" id="excerpt" name="excerpt" maxlength="500"
+                   th:value="${mode == 'edit'} ? ${post.excerpt} : ''">
+        </div>
+
+        <div class="form-group">
+            <label for="content">Content</label>
+            <textarea id="content" name="content" rows="12" required
+                      th:text="${mode == 'edit'} ? ${post.content} : ''"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="coverImageUrl">Cover image URL <span class="hint">(optional)</span></label>
+            <input type="url" id="coverImageUrl" name="coverImageUrl"
+                   th:value="${mode == 'edit'} ? ${post.coverImageUrl} : ''">
+        </div>
+
+        <div class="form-group">
+            <label for="tags">Tags <span class="hint">(comma separated)</span></label>
+            <input type="text" id="tags" name="tags"
+                   th:value="${mode == 'edit' and post.tags != null} ? ${#strings.arrayJoin(post.tags, ', ')} : ''">
+        </div>
+
+        <div class="form-group">
+            <label>Visibility</label>
+            <div class="visibility-toggle">
+                <label class="visibility-option">
+                    <input type="radio" name="visibility" value="PUBLIC"
+                           th:checked="${mode != 'edit' or post.visibility.name() == 'PUBLIC'}">
+                    <span>🌐 Public — anyone can read it</span>
+                </label>
+                <label class="visibility-option">
+                    <input type="radio" name="visibility" value="PRIVATE"
+                           th:checked="${mode == 'edit' and post.visibility.name() == 'PRIVATE'}">
+                    <span>🔒 Private — signed-in users only</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="submit-btn">
+                <span th:text="${mode == 'edit'} ? 'Save changes' : 'Publish post'"></span>
+            </button>
+            <a href="/" class="btn-text">Cancel</a>
+        </div>
+    </form>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:src="@{/js/toast.js}"></script>
+<script th:src="@{/js/blog-form.js}"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: pageHead(${post.title})}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container container-narrow">
+    <div th:replace="~{fragments/alerts :: alerts}"></div>
+
+    <article class="post-detail glass">
+        <div class="post-hero-image" th:if="${post.coverImageUrl}"
+             th:style="'background-image:url(' + ${post.coverImageUrl} + ')'"></div>
+
+        <div class="post-detail-body">
+            <div class="card-meta-row">
+                <span class="badge"
+                      th:classappend="${post.visibility.name() == 'PRIVATE'} ? 'badge-private' : 'badge-public'"
+                      th:text="${post.visibility.name() == 'PRIVATE'} ? '🔒 Private' : '🌐 Public'"></span>
+                <span class="card-date" th:text="${#temporals.format(post.createdAt, 'MMMM d, yyyy')}"></span>
+            </div>
+
+            <h1 class="post-title" th:text="${post.title}"></h1>
+            <p class="post-author">by <strong th:text="${post.authorName}"></strong></p>
+
+            <div class="post-tags" th:if="${!#lists.isEmpty(post.tags)}">
+                <span class="tag-pill" th:each="t : ${post.tags}" th:text="${t}"></span>
+            </div>
+
+            <div class="post-content" th:utext="${#strings.replace(post.content, T(System).lineSeparator(), '<br/>')}"></div>
+
+            <div class="post-actions" sec:authorize="isAuthenticated()" th:if="${post.authorId}">
+                <a th:href="@{'/blogs/' + ${post.id} + '/edit'}"
+                   class="btn btn-secondary btn-sm"
+                   sec:authentication="name"
+                   th:attr="data-viewer-check=${post.authorId}"
+                   id="edit-link">Edit</a>
+                <button type="button" class="btn btn-danger btn-sm" id="delete-btn"
+                        th:attr="data-post-id=${post.id}">Delete</button>
+            </div>
+        </div>
+    </article>
+
+    <a href="/" class="back-link">&larr; Back to feed</a>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:src="@{/js/toast.js}"></script>
+<script th:src="@{/js/blog-actions.js}"></script>
+</body>
+</html>
