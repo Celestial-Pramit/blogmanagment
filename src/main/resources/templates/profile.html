@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: pageHead('Your profile')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container container-narrow">
+    <div class="page-header">
+        <h1>Your profile</h1>
+    </div>
+    <div th:replace="~{fragments/alerts :: alerts}"></div>
+
+    <div class="profile-card">
+        <div class="profile-avatar-lg"
+             th:text="${#strings.toUpperCase(#strings.substring(user.displayName,0,1))}"></div>
+        <div>
+            <p class="profile-name" th:text="${user.displayName}"></p>
+            <p class="profile-email" th:text="${user.email}"></p>
+        </div>
+    </div>
+
+    <div class="form-card">
+        <h2 class="form-title">Display name</h2>
+        <form th:action="@{/profile}" method="post">
+            <div class="form-group">
+                <label for="displayName">Name</label>
+                <input type="text" id="displayName" name="displayName"
+                       th:value="${user.displayName}" maxlength="100" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+    </div>
+
+    <div class="form-card">
+        <h2 class="form-title">Change password</h2>
+        <form th:action="@{/profile/password}" method="post">
+            <div class="form-group">
+                <label for="currentPassword">Current password</label>
+                <input type="password" id="currentPassword" name="currentPassword" required>
+            </div>
+            <div class="form-group">
+                <label for="newPassword">New password <span class="hint">(min. 6 characters)</span></label>
+                <input type="password" id="newPassword" name="newPassword" minlength="6" required>
+            </div>
+            <button type="submit" class="btn btn-secondary">Update password</button>
+        </form>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

@@ -47,7 +47,6 @@ public class BlogPageController {
             return "redirect:/auth/login";
         }
         model.addAttribute("post", post);
-        model.addAttribute("contentHtml", post.content().replace("\r\n", "\n").replace("\n", "<br/>"));
         return "blog-detail";
     }
 

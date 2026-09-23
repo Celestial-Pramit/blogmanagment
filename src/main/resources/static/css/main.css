@@ -385,6 +385,50 @@ a { color: inherit; text-decoration: none; }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
+/* ═══════════════════════════════════════════
+   PROFILE AVATAR + PAGE
+   ═══════════════════════════════════════════ */
+.profile-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.85rem;
+  transition: opacity 0.15s ease;
+}
+.profile-avatar:hover { opacity: 0.85; }
+
+.profile-card {
+  display: flex; align-items: center; gap: 20px;
+  padding: 28px; margin: 24px 0 32px;
+  background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius);
+}
+.profile-avatar-lg {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 1.6rem; flex-shrink: 0;
+}
+.profile-name { margin: 0 0 4px; font-weight: 600; font-size: 1.05rem; }
+.profile-email { margin: 0; color: var(--ink-muted); font-size: 0.9rem; }
+
+/* ═══════════════════════════════════════════
+   POST DETAIL — refined byline + top nav link
+   ═══════════════════════════════════════════ */
+.post-meta-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.post-byline {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--ink-muted); margin: 4px 0 22px; font-size: 0.92rem;
+  padding-bottom: 22px; border-bottom: 1px solid var(--border);
+}
+.post-byline strong { color: var(--ink); }
+.profile-avatar-sm {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.75rem; flex-shrink: 0;
+}
+.back-link-top { display: inline-block; margin: 28px 0 8px; }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
