@@ -30,10 +30,23 @@
             <button type="submit" class="btn btn-primary btn-full">Sign in</button>
         </form>
 
+        <div class="demo-login">
+            <button type="button" id="fill-demo" class="btn-text">Use demo login</button>
+            <span class="demo-login-hint">editorial@inkwell.dev / inkwell-demo-2026</span>
+        </div>
+
         <p class="form-footer-note">No account? <a href="/auth/register">Sign up</a></p>
     </div>
 </main>
 
 <footer th:replace="~{fragments/layout :: footer}"></footer>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("fill-demo").addEventListener("click", function () {
+        document.getElementById("username").value = "editorial@inkwell.dev";
+        document.getElementById("password").value = "inkwell-demo-2026";
+    });
+});
+</script>
 </body>
 </html>
