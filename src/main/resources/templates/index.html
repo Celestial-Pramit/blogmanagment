@@ -6,8 +6,9 @@
 
 <section class="hero">
     <div class="hero-inner">
+        <span class="hero-eyebrow">A shared publication</span>
         <h1 class="hero-title">Ideas worth <span class="text-gradient">writing down.</span></h1>
-        <p class="hero-subtitle">A shared space for public thoughts and private drafts — sign in to write, or just read.</p>
+        <p class="hero-subtitle">A space for public essays and private drafts — sign in to write, or just read.</p>
     </div>
 </section>
 
@@ -20,7 +21,7 @@
 
     <div th:unless="${#lists.isEmpty(feed.items)}" class="bento-grid" id="feed-grid">
         <article th:each="post, iter : ${feed.items}"
-                  class="glass card-hover-lift bento-item"
+                  class="bento-item"
                   th:classappend="${iter.index == 0} ? 'bento-item--feature' : 'bento-item--standard'">
             <a th:href="@{'/blogs/' + ${post.slug}}" class="card-link">
                 <div class="card-image" th:if="${post.coverImageUrl}"
@@ -29,13 +30,13 @@
                     <div class="card-meta-row">
                         <span class="badge"
                               th:classappend="${post.visibility.name() == 'PRIVATE'} ? 'badge-private' : 'badge-public'"
-                              th:text="${post.visibility.name() == 'PRIVATE'} ? '🔒 Private' : '🌐 Public'"></span>
+                              th:text="${post.visibility.name() == 'PRIVATE'} ? 'Private' : 'Public'"></span>
                         <span class="card-date" th:text="${#temporals.format(post.createdAt, 'MMM d, yyyy')}"></span>
                     </div>
                     <h2 class="card-title" th:text="${post.title}"></h2>
                     <p class="card-excerpt" th:text="${post.excerpt}"></p>
                     <div class="card-footer">
-                        <span class="card-author" th:text="'by ' + ${post.authorName}"></span>
+                        <span class="card-author" th:text="${post.authorName}"></span>
                         <span class="card-tags" th:if="${!#lists.isEmpty(post.tags)}">
                             <span class="tag-pill" th:each="t : ${post.tags}" th:text="${t}"></span>
                         </span>
