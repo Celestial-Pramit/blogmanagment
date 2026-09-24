@@ -107,10 +107,23 @@ a { color: inherit; text-decoration: none; }
    HERO — quiet, typographic, no aurora
    ═══════════════════════════════════════════ */
 .hero {
+  position: relative;
   padding: 100px 32px 64px;
   border-bottom: 1px solid var(--border);
+  overflow: hidden;
 }
-.hero-inner { max-width: 720px; margin: 0 auto; }
+#hero-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+}
 .hero-eyebrow {
   color: var(--accent);
   font-size: 0.8rem;
@@ -121,11 +134,18 @@ a { color: inherit; text-decoration: none; }
   display: block;
 }
 .hero-title {
+  position: relative;
   font-size: clamp(2.2rem, 4.5vw, 3.4rem);
   font-weight: 700;
   letter-spacing: -0.025em;
   margin: 0 0 18px;
   color: var(--ink);
+}
+.hero-title .scramble-content { visibility: hidden; }
+.hero-title .scramble-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 .text-gradient {
   color: var(--accent);
@@ -152,9 +172,15 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: background 0.25s ease, border-color 0.25s ease,
+              transform 0.25s ease, box-shadow 0.25s ease;
 }
-.bento-item:hover { background: var(--bg-raised); border-color: var(--border-hover); }
+.bento-item:hover {
+  background: var(--bg-raised);
+  border-color: var(--border-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(99, 102, 241, 0.16);
+}
 .bento-item--feature { grid-column: span 3; grid-row: span 1; }
 .bento-item--feature .card-link { flex-direction: row; }
 .bento-item--feature .card-image { width: 46%; height: auto; min-height: 280px; }
@@ -167,7 +193,11 @@ a { color: inherit; text-decoration: none; }
   background-size: cover;
   background-position: center;
   background-color: var(--surface);
+  transform: scale(1);
+  transition: transform 0.3s ease;
+  will-change: transform;
 }
+.bento-item:hover .card-image { transform: scale(1.04); }
 .card-body { padding: 24px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
 
 .card-meta-row { display: flex; align-items: center; justify-content: space-between; }
@@ -429,4 +459,16 @@ a { color: inherit; text-decoration: none; }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+
+  #hero-particles { display: none; }
+
+  .hero-title .scramble-overlay { display: none; }
+  .hero-title .scramble-content { visibility: visible; }
+
+  .bento-item,
+  .bento-item .card-image {
+    transform: none;
+  }
+  .bento-item { box-shadow: none; }
+  .bento-item:hover { transform: none; }
 }

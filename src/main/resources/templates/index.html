@@ -5,9 +5,10 @@
 <nav th:replace="~{fragments/layout :: navbar}"></nav>
 
 <section class="hero">
+    <div id="hero-particles" aria-hidden="true"></div>
     <div class="hero-inner">
         <span class="hero-eyebrow">A shared publication</span>
-        <h1 class="hero-title">Ideas worth <span class="text-gradient">writing down.</span></h1>
+        <h1 class="hero-title" data-scramble>Ideas worth <span class="text-gradient">writing down.</span></h1>
         <p class="hero-subtitle">A space for public essays and private drafts — sign in to write, or just read.</p>
     </div>
 </section>
@@ -56,5 +57,8 @@
 
 <footer th:replace="~{fragments/layout :: footer}"></footer>
 <script th:src="@{/js/toast.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+<script th:src="@{/js/starfield.js}"></script>
+<script th:src="@{/js/scramble-text.js}"></script>
 </body>
 </html>
