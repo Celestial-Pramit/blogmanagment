@@ -85,9 +85,23 @@ a { color: inherit; text-decoration: none; }
   color: var(--ink-muted);
   font-size: 0.92rem;
   font-weight: 500;
-  transition: color 0.15s ease;
+  position: relative;
+  transition: color 0.2s ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
 }
 .nav-link:hover { color: var(--ink); }
+.nav-link:hover::after { transform: scaleX(1); }
 .nav-authed, .nav-guest { display: flex; align-items: center; gap: 18px; }
 .nav-user {
   color: var(--ink-faint);
@@ -99,24 +113,55 @@ a { color: inherit; text-decoration: none; }
 .btn-text {
   background: none; border: none; color: var(--ink-muted);
   font: inherit; cursor: pointer; font-size: 0.88rem;
-  transition: color 0.15s ease; padding: 0;
+  padding: 0;
+  position: relative;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
 }
-.btn-text:hover { color: var(--ink); }
+.btn-text::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.btn-text:hover { color: var(--accent); text-shadow: 0 0 14px rgba(99, 102, 241, 0.45); }
+.btn-text:hover::after { transform: scaleX(1); }
+.nav-guest .btn-secondary,
+.nav-authed .btn-primary {
+  box-shadow: 0 2px 12px rgba(99, 102, 241, 0.18);
+  transition: background 0.2s ease, border-color 0.2s ease,
+              box-shadow 0.2s ease, transform 0.2s ease;
+}
+.nav-guest .btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+  transform: translateY(-1px);
+}
+.nav-authed .btn-primary:hover {
+  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.45);
+  transform: translateY(-1px);
+}
 
 /* ═══════════════════════════════════════════
-   HERO — quiet, typographic, no aurora
+   HERO + FULL-PAGE STARFIELD LAYER
    ═══════════════════════════════════════════ */
+#hero-particles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
 .hero {
   position: relative;
   padding: 100px 32px 64px;
   border-bottom: 1px solid var(--border);
   overflow: hidden;
-}
-#hero-particles {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
 }
 .hero-inner {
   position: relative;
@@ -140,12 +185,14 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: -0.025em;
   margin: 0 0 18px;
   color: var(--ink);
+  overflow: hidden;
 }
 .hero-title .scramble-content { visibility: hidden; }
 .hero-title .scramble-overlay {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  white-space: nowrap;
 }
 .text-gradient {
   color: var(--accent);
@@ -168,15 +215,17 @@ a { color: inherit; text-decoration: none; }
   margin-top: 40px;
 }
 .bento-item {
-  background: var(--bg);
+  background: rgba(11, 12, 15, 0.6);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   transition: background 0.25s ease, border-color 0.25s ease,
               transform 0.25s ease, box-shadow 0.25s ease;
 }
 .bento-item:hover {
-  background: var(--bg-raised);
+  background: rgba(19, 20, 23, 0.72);
   border-color: var(--border-hover);
   transform: translateY(-4px);
   box-shadow: 0 14px 34px rgba(99, 102, 241, 0.16);

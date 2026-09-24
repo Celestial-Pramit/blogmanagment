@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    var DURATION = 750;
+    var DURATION = 1100;
     var CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#$@%&*+=?!";
 
     function prefersReducedMotion() {

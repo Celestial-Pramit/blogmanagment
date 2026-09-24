@@ -14,23 +14,23 @@
 
         window.tsParticles.load("hero-particles", {
             fullScreen: { enable: false },
-            fpsLimit: 30,
+            fpsLimit: 45,
             detectRetina: true,
             particles: {
-                number: { value: 70 },
+                number: { value: 110 },
                 color: { value: ["#ffffff", "#d6d7dc", "#9a9ba3"] },
                 shape: { type: "circle" },
                 opacity: {
-                    value: 0.45,
-                    random: { enable: true, minimumValue: 0.1 }
+                    value: 0.7,
+                    random: { enable: true, minimumValue: 0.25 }
                 },
                 size: {
-                    value: { min: 0.6, max: 1.5 },
+                    value: { min: 1.2, max: 2.6 },
                     random: true
                 },
                 move: {
                     enable: true,
-                    speed: 0.25,
+                    speed: 0.9,
                     direction: "top",
                     random: true,
                     straight: false,
